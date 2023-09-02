@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">mynewsapp</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="article_categories">
+        <item name="business">Business</item>
+        <item name="entertainment">Entertainment</item>
+        <item name="general">General</item>
+        <item name="health">Health</item>
+        <item name="science">Science</item>
+        <item name="sports">Sports</item>
+        <item name="technology">Technology</item>
+    </string-array>
+</resources>

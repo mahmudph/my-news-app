@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_navigation"
+    app:startDestination="@id/category_screen">
+
+    <fragment
+        android:id="@+id/category_screen"
+        android:name="id.myone.mynewsapp.view.ui.CategoryArticleFragment"
+        tools:layout="@layout/fragment_category_article">
+
+        <action
+            android:id="@+id/action_category_screen_to_source_screen"
+            app:destination="@id/source_screen" />
+        <argument
+            android:name="categoryName"
+            android:defaultValue="business"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/source_screen"
+        android:name="id.myone.mynewsapp.view.ui.ArticleListFragment"
+        tools:layout="@layout/fragment_article_list">
+
+        <action
+            android:id="@+id/action_source_screen_to_article_detail"
+            app:destination="@id/article_detail" />
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/article_detail"
+        android:name="id.myone.mynewsapp.view.ui.ArticleDetailFragment"
+        tools:layout="@layout/fragment_article_detail">
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+    </fragment>
+
+</navigation>
