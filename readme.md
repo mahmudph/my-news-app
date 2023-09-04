@@ -23,3 +23,4 @@ This is a news app that allows users to view news from different sources and als
 - Coroutines
 - Paging 3
 - Koin 
+- Offline Mode
