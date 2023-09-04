@@ -12,22 +12,13 @@ import retrofit2.http.Query
 
 interface AppService {
     @GET("/v2/top-headlines")
-    suspend fun getNews(
-        @Query("category") category: String,
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int,
-        @Query("language") language: String,
-    ): ArticleResponse
-
-    @GET("/v2/everything")
-    suspend fun searchNews(
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int,
+    suspend fun getArticles(
         @Query("q") query: String,
+        @Query("sources") category: String,
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int,
         @Query("language") language: String,
     ): ArticleResponse
-
-
     @GET("/v2/sources")
     suspend fun getSources(
         @Query("page") page: Int,

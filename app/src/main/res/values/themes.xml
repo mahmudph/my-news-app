@@ -1,9 +1,71 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
+    <style name="Theme.MySplash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="postSplashScreenTheme">@style/Theme.Mynewsapp</item>
+    </style>
+
     <style name="Base.Theme.Mynewsapp" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/teal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/teal_300</item>
+        <item name="colorSecondary">@color/blueGrey</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryVariant">@color/grey</item>
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:navigationBarColor" tools:targetApi="o_mr1">?attr/colorOnPrimary</item>
     </style>
 
     <style name="Theme.Mynewsapp" parent="Base.Theme.Mynewsapp" />
+
+    <style name="TitleItem" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/plusjakartasansextrabold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="TitleToolbar" parent="TitleItem">
+        <item name="android:textSize">22sp</item>
+        <item name="titleTextColor">?colorOnPrimary</item>
+        <item name="android:layout_marginBottom">12dp</item>
+    </style>
+
+    <style name="TitleArticle" parent="TitleItem">
+        <item name="android:textSize">18sp</item>
+        <item name="fontFamily">@font/plusjakartasansextrabold</item>
+    </style>
+
+    <style name="TitleDescription" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/plusjakartasansregular</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="LoadingTitle" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/plusjakartasansbold</item>
+    </style>
+
+    <style name="ArticleContent" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/plusjakartasansregular</item>
+    </style>
+
+    <style name="TextCaption" parent="TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/plusjakartasanssemibold</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="ToolBar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:gravity">center</item>
+        <item name="android:textColorSecondary">?colorOnPrimary</item>
+        <item name="editTextColor">?colorOnPrimary</item>
+        <item name="android:textColorHint">?colorOnPrimary</item>
+        <item name="textFillColor">?colorPrimary</item>
+        <item name="android:textColor">?colorOnPrimary</item>
+    </style>
 </resources>

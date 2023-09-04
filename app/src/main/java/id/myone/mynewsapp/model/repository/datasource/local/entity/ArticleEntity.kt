@@ -4,10 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import id.myone.mynewsapp.common.articleTable
 import id.myone.mynewsapp.model.repository.datasource.local.entity.interfaces.BaseEntity
 import id.myone.mynewsapp.model.repository.datasource.remote.model.Source
 
-@Entity(tableName = "articles")
+@Entity(tableName = articleTable)
 data class ArticleEntity(
     @PrimaryKey(autoGenerate = true)
     override val id: Int = 0,

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    tools:context=".view.ui.article_screen.bottomsheet.ListOptionDialogFragment">
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="5dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/medium_shape"
+        android:backgroundTint="?colorPrimary" />
+
+    <LinearLayout
+        android:id="@+id/go_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/baseline_info_24"
+            android:backgroundTint="?colorSecondary"
+            android:contentDescription="@string/placeholder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TitleDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/see_detail"
+            tools:text="Title" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/go_webview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@drawable/baseline_info_24"
+            android:backgroundTint="?colorSecondary"
+            android:contentDescription="@string/placeholder" />
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/TitleDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:text="@string/see_article_in_webview"
+            tools:text="Title" />
+    </LinearLayout>
+</LinearLayout>

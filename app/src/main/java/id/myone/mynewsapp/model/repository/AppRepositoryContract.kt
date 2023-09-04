@@ -15,8 +15,5 @@ interface AppRepositoryContract {
     suspend fun getSourceById(id: String): SourceEntity
 
     fun getSources(category: String): Flow<PagingData<SourceEntity>>
-    fun getArticles(sources: String): Flow<PagingData<ArticleEntity>>
-
-    fun searchArticles(searchQuery: String): Flow<PagingData<ArticleEntity>>
-    fun searchSources(searchQuery: String): Flow<PagingData<SourceEntity>>
+    fun getArticles(sources: String, q: String): Flow<PagingData<ArticleEntity>>
 }

@@ -7,7 +7,7 @@ package id.myone.mynewsapp.base.paging.interfaces
 
 
 interface BaseRemoteMediatorContract<T, Z> {
-    suspend fun getRemoteKeyById(id: Any): Z
+    suspend fun getRemoteKeyById(id: Int): Z
 
     suspend fun truncateLocalData()
 

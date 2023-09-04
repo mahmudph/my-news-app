@@ -6,6 +6,8 @@
 package id.myone.mynewsapp.base.ui
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,14 +23,13 @@ import id.myone.mynewsapp.utils.UIState
 import id.myone.mynewsapp.view.widget.LoadingDialog
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 
 abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseFragmentContract<T> {
     private var _binding: T? = null
-    protected var binding: T = _binding!!
+    protected val binding get() = _binding!!
 
-    private val loadingDialog: LoadingDialog by lazy {
-        LoadingDialog.newInstance()
-    }
+    private val loadingDialog: LoadingDialog by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,29 +40,28 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseFragmentContract<
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupObserver()
         setupView()
+        setupObserver()
     }
 
     override fun showLoading() {
-        if (loadingDialog.isVisible) return
-        loadingDialog.show(childFragmentManager, LoadingDialog::class.java.simpleName)
+        if (!loadingDialog.isAdded && !loadingDialog.isVisible) {
+            val fragment = parentFragmentManager.beginTransaction().remove(loadingDialog)
+            loadingDialog.show(fragment, loadingDialogName)
+        }
     }
 
     override fun hideLoading() {
-        if (loadingDialog.isVisible) loadingDialog.dismiss()
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (loadingDialog.isVisible || loadingDialog.isAdded) loadingDialog.dismiss()
+        }, 1000)
     }
 
     override fun <T> observerViewModel(
         flow: Flow<Event<UIState<T>>>,
-        action: (isError: Boolean, T?) -> Unit
+        action: (isError: Boolean, T?) -> Unit,
     ) {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -102,5 +102,9 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseFragmentContract<
                 actionListener.invoke()
             }
         }
+    }
+
+    companion object {
+        private val loadingDialogName = LoadingDialog.Companion::class.java.name
     }
 }

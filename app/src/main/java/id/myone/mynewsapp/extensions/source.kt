@@ -10,7 +10,7 @@ import id.myone.mynewsapp.model.repository.datasource.remote.model.SourceData
 
 fun SourceData.mapToEntity(): SourceEntity {
     return SourceEntity(
-        id = id,
+        sourceId = id,
         category = category,
         country = country,
         description = description,

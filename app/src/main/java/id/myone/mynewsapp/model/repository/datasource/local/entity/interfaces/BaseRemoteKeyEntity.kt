@@ -5,6 +5,7 @@
 
 package id.myone.mynewsapp.model.repository.datasource.local.entity.interfaces
 
+
 interface BaseRemoteKeyEntity : BaseEntity {
     val prePage: Int?
     val nexPage: Int?

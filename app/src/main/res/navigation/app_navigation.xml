@@ -7,7 +7,8 @@
 
     <fragment
         android:id="@+id/category_screen"
-        android:name="id.myone.mynewsapp.view.ui.CategoryArticleFragment"
+        android:name="id.myone.mynewsapp.view.ui.main_screen.CategoryArticleFragment"
+        android:label="@string/category_article"
         tools:layout="@layout/fragment_category_article">
 
         <action
@@ -20,24 +21,88 @@
     </fragment>
     <fragment
         android:id="@+id/source_screen"
-        android:name="id.myone.mynewsapp.view.ui.ArticleListFragment"
-        tools:layout="@layout/fragment_article_list">
+        android:name="id.myone.mynewsapp.view.ui.source_screen.ArticleSourceFragment"
+        android:label="@string/source_article"
+        tools:layout="@layout/fragment_article_source">
 
+        <argument
+            android:name="categoryName"
+            android:defaultValue="business"
+            app:argType="string" />
+
+        <argument
+            android:name="sourceId"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="sourcename"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_source_screen_to_article_list"
+            app:destination="@id/article_list" />
+        <action
+            android:id="@+id/action_source_screen_to_search_article"
+            app:destination="@id/search_article" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/article_list"
+        android:name="id.myone.mynewsapp.view.ui.article_screen.ArticleListFragment"
+        android:label="@string/articles"
+        tools:layout="@layout/fragment_article_list">
         <action
             android:id="@+id/action_source_screen_to_article_detail"
             app:destination="@id/article_detail" />
+        <action
+            android:id="@+id/action_source_screen_to_article_detail_web_view"
+            app:destination="@id/article_detail_web_view" />
+
         <argument
-            android:name="articleId"
-            app:argType="integer" />
+            android:name="sourceId"
+            app:argType="string" />
+        <argument
+            android:name="sourcename"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_article_list_to_search_source"
+            app:destination="@id/search_source" />
     </fragment>
 
     <fragment
         android:id="@+id/article_detail"
         android:name="id.myone.mynewsapp.view.ui.ArticleDetailFragment"
+        android:label="@string/article_details"
         tools:layout="@layout/fragment_article_detail">
         <argument
             android:name="articleId"
             app:argType="integer" />
     </fragment>
 
+    <fragment
+        android:id="@+id/article_detail_web_view"
+        android:name="id.myone.mynewsapp.view.ui.ArticleWebViewDetailFragment"
+        android:label="@string/article_details"
+        tools:layout="@layout/fragment_article_web_view_detail">
+        <argument
+            android:name="url"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/search_article"
+        android:name="id.myone.mynewsapp.view.ui.SearchArticleFragment"
+        android:label="@string/search_article"
+        tools:layout="@layout/fragment_search_article" />
+
+    <fragment
+        android:id="@+id/search_source"
+        android:name="id.myone.mynewsapp.view.ui.SearchSourceFragment"
+        android:label="@string/search_source"
+        tools:layout="@layout/fragment_search_source" />
 </navigation>

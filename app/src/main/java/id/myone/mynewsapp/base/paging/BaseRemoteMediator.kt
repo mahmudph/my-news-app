@@ -21,7 +21,7 @@ abstract class BaseRemoteMediator<T : BaseEntity, Z : BaseRemoteKeyEntity>(
 ) : RemoteMediator<Int, T>(), BaseRemoteMediatorContract<T, Z> {
 
     override suspend fun initialize(): InitializeAction {
-        return InitializeAction.SKIP_INITIAL_REFRESH
+        return InitializeAction.LAUNCH_INITIAL_REFRESH
     }
 
     override suspend fun load(

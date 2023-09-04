@@ -12,7 +12,6 @@ import androidx.room.Query
 import id.myone.mynewsapp.common.sourceRemoteKeyTable
 import id.myone.mynewsapp.model.repository.datasource.local.entity.SourceRemoteKeyEntity
 
-
 @Dao
 interface SourceRemoteKeyDao {
     @Query("select * from $sourceRemoteKeyTable where id=:id")

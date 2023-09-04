@@ -7,13 +7,10 @@ package id.myone.mynewsapp.model.repository.paging
 
 import id.myone.mynewsapp.base.paging.BaseRemoteMediator
 import id.myone.mynewsapp.common.language
-import id.myone.mynewsapp.common.sourceRemoteKeyTable
 import id.myone.mynewsapp.extensions.mapToEntity
 import id.myone.mynewsapp.model.repository.datasource.local.AppDatabase
 import id.myone.mynewsapp.model.repository.datasource.local.dao.SourceDao
 import id.myone.mynewsapp.model.repository.datasource.local.dao.SourceRemoteKeyDao
-import id.myone.mynewsapp.model.repository.datasource.local.entity.ArticleEntity
-import id.myone.mynewsapp.model.repository.datasource.local.entity.ArticleRemoteKeyEntity
 import id.myone.mynewsapp.model.repository.datasource.local.entity.SourceEntity
 import id.myone.mynewsapp.model.repository.datasource.local.entity.SourceRemoteKeyEntity
 import id.myone.mynewsapp.model.repository.datasource.remote.AppService
@@ -28,8 +25,8 @@ class SourceArticleRemoteMediator(
 ) : BaseRemoteMediator<SourceEntity, SourceRemoteKeyEntity>(localDatabase) {
 
 
-    override suspend fun getRemoteKeyById(id: Any): SourceRemoteKeyEntity {
-        return sourceRemoteDao.getRemoteKeyById(id as Int)
+    override suspend fun getRemoteKeyById(id: Int): SourceRemoteKeyEntity {
+        return sourceRemoteDao.getRemoteKeyById(id)
     }
 
     override suspend fun truncateLocalData() {

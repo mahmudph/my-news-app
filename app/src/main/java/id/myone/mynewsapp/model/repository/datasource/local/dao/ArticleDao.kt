@@ -16,14 +16,14 @@ import id.myone.mynewsapp.model.repository.datasource.local.entity.ArticleEntity
 @Dao
 interface ArticleDao {
 
-    @Query("select * from $articleTable")
-    fun getAllArticles(): PagingSource<Int, ArticleEntity>
+    @Query("select * from $articleTable where arc_id=:id")
+    fun getAllArticles(id: String): PagingSource<Int, ArticleEntity>
 
-    @Query("select * from $articleTable where id=:newsId")
-    suspend fun getArticlesById(newsId: Int): ArticleEntity?
+    @Query("select * from $articleTable where id=:id")
+    suspend fun getArticlesById(id: Int): ArticleEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticles(news: List<ArticleEntity>)
+    suspend fun insertArticles(article: List<ArticleEntity>)
 
     @Query("delete from $articleTable")
     suspend fun deleteAllArticles()

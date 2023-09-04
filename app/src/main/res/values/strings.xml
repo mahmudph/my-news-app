@@ -1,14 +1,29 @@
 <resources>
     <string name="app_name">mynewsapp</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="placeholder">placeholder</string>
 
-    <string-array name="article_categories">
-        <item name="business">Business</item>
-        <item name="entertainment">Entertainment</item>
-        <item name="general">General</item>
-        <item name="health">Health</item>
-        <item name="science">Science</item>
-        <item name="sports">Sports</item>
-        <item name="technology">Technology</item>
-    </string-array>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="general">General</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="category_article">Category Article</string>
+    <string name="source_article">Article Sources</string>
+    <string name="articles">Articles</string>
+    <string name="article_details">Article Details</string>
+    <string name="search_article">Search Article</string>
+    <string name="search_source">Search Source</string>
+    <string name="process_failure">Process Failure</string>
+    <string name="process_failure_description">Process Failure, please check your internet connection, then try again</string>
+    <string name="loading">Please Wait...</string>
+    <string name="data_not_found">Data Not Found</string>
+    <string name="data_not_found_desc">We couldn\'t locate the data you\'re seeking.</string>
+    <string name="search">search</string>
+    <string name="see_detail">See Detail</string>
+    <string name="see_article_in_webview">See Article in Webview</string>
+    <string name="back">Back</string>
+    <string name="retry">Retry</string>
 </resources>

@@ -5,6 +5,8 @@
 
 package id.myone.mynewsapp.model.repository.datasource.local.entity.interfaces
 
+
+
 interface BaseEntity {
-    val id: Any
+    val id: Int
 }

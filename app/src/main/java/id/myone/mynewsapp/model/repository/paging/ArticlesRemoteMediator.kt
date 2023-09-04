@@ -18,6 +18,7 @@ import id.myone.mynewsapp.model.repository.datasource.remote.AppService
 
 class ArticlesRemoteMediator(
     localDatabase: AppDatabase,
+    private val search: String,
     private val sources: String,
     private val remoteService: AppService,
     private val articleDao: ArticleDao,
@@ -25,8 +26,8 @@ class ArticlesRemoteMediator(
 ) : BaseRemoteMediator<ArticleEntity, ArticleRemoteKeyEntity>(localDatabase) {
 
 
-    override suspend fun getRemoteKeyById(id: Any): ArticleRemoteKeyEntity {
-        return articleRemoteKeyDao.getRemoteKeyById(id as Int)
+    override suspend fun getRemoteKeyById(id: Int): ArticleRemoteKeyEntity {
+        return articleRemoteKeyDao.getRemoteKeyById(id)
     }
 
     override suspend fun truncateLocalData() {
@@ -38,11 +39,11 @@ class ArticlesRemoteMediator(
         page: Int,
         pageSize: Int,
     ): List<ArticleEntity> {
-        val response =  remoteService.getNews(sources, page, pageSize, language)
+        val response = remoteService.getArticles(search, sources, page, pageSize, language)
         return response.articles.map { it.mapToEntity() }
     }
 
-    override suspend  fun refreshLocalData(
+    override suspend fun refreshLocalData(
         prePage: Int?,
         nextPage: Int?,
         data: List<ArticleEntity>,

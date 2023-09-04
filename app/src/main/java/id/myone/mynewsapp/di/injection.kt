@@ -13,23 +13,23 @@ import id.myone.mynewsapp.model.repository.AppRepository
 import id.myone.mynewsapp.model.repository.AppRepositoryContract
 import id.myone.mynewsapp.model.repository.datasource.local.AppDatabase
 import id.myone.mynewsapp.model.repository.datasource.remote.AppService
+import id.myone.mynewsapp.view.widget.LoadingDialog
 import id.myone.mynewsapp.viewmodel.DetailArticleViewModel
 import id.myone.mynewsapp.viewmodel.ListArticleViewModel
 import id.myone.mynewsapp.viewmodel.SourceViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-
 val appNetworkModule = module {
     single {
-        val client = OkHttpClient.Builder()
+        var client = OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
             .addInterceptor { chain ->
@@ -41,9 +41,7 @@ val appNetworkModule = module {
                 chain.proceed(request.newBuilder().url(url).build())
             }
 
-        if (BuildConfig.DEBUG) {
-            client.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-        }
+        client = client.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
 
         client.build()
     }
@@ -73,6 +71,9 @@ val appDatabaseModule = module {
     single { get<AppDatabase>().sourceDao() }
 }
 
+val utilityModule = module {
+    fragment { LoadingDialog.newInstance() }
+}
 
 val appViewModels = module {
     viewModel { ListArticleViewModel(get()) }
@@ -80,4 +81,4 @@ val appViewModels = module {
     viewModel { SourceViewModel(get()) }
 }
 
-val appModules = listOf(appNetworkModule, appDatabaseModule, appViewModels)
+val appModules = listOf(appNetworkModule, appDatabaseModule, appViewModels, utilityModule)
