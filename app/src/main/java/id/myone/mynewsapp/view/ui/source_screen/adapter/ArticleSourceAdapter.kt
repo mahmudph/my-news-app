@@ -53,7 +53,7 @@ class ArticleSourceAdapter(
                 oldItem: SourceEntity,
                 newItem: SourceEntity,
             ): Boolean {
-                return oldItem.sourceId == newItem.sourceId
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(

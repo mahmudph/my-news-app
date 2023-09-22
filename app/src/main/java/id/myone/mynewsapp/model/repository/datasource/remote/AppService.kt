@@ -21,9 +21,8 @@ interface AppService {
     ): ArticleResponse
     @GET("/v2/sources")
     suspend fun getSources(
-        @Query("page") page: Int,
-        @Query("pageSize") pageSize: Int,
         @Query("category") category: String,
         @Query("language") language: String,
+        @Query("page") page: Int = 1,
     ): SourceResponse
 }

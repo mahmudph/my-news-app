@@ -9,7 +9,9 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import id.myone.mynewsapp.common.language
 import id.myone.mynewsapp.common.pageSize
+import id.myone.mynewsapp.extensions.mapToEntity
 import id.myone.mynewsapp.model.repository.datasource.local.AppDatabase
 import id.myone.mynewsapp.model.repository.datasource.local.dao.ArticleDao
 import id.myone.mynewsapp.model.repository.datasource.local.dao.SourceDao
@@ -17,7 +19,6 @@ import id.myone.mynewsapp.model.repository.datasource.local.entity.ArticleEntity
 import id.myone.mynewsapp.model.repository.datasource.local.entity.SourceEntity
 import id.myone.mynewsapp.model.repository.datasource.remote.AppService
 import id.myone.mynewsapp.model.repository.paging.ArticlesRemoteMediator
-import id.myone.mynewsapp.model.repository.paging.SourceArticleRemoteMediator
 import kotlinx.coroutines.flow.Flow
 
 @OptIn(ExperimentalPagingApi::class)
@@ -32,19 +33,14 @@ class AppRepository(
         return articleDao.getArticlesById(id)
     }
 
-    override fun getSources(category: String): Flow<PagingData<SourceEntity>> {
-        val pagingSourceFactory = { sourceDao.getAllSources(category) }
-        return Pager(
-            config = PagingConfig(pageSize = pageSize, enablePlaceholders = false),
-            remoteMediator = SourceArticleRemoteMediator(
-                remoteService = appService,
-                category = category,
-                localDatabase = appDatabase,
-                sourceDao = sourceDao,
-                sourceRemoteDao = appDatabase.sourceRemoteKeyDao(),
-            ),
-            pagingSourceFactory = pagingSourceFactory,
-        ).flow
+    override suspend fun getSources(category: String, page: Int): ResultData<List<SourceEntity>> {
+        return try {
+            val result = appService.getSources(category, language, page)
+            val response = result.sources.map { it.mapToEntity() }
+            ResultData.Success(response)
+        } catch (e: Exception) {
+            ResultData.Error(e)
+        }
     }
 
     override suspend fun getSourceById(id: String): SourceEntity {
