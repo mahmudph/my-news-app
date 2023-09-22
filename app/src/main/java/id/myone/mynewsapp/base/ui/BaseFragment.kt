@@ -66,7 +66,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseFragmentContract<
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 flow.collect { event ->
-                    event.getContentIfNotHandled()?.let { data ->
+                    event.getContent().let { data ->
                         when (data) {
                             is UIState.Loading -> showLoading()
                             is UIState.Success -> {
@@ -80,7 +80,7 @@ abstract class BaseFragment<T : ViewBinding> : Fragment(), BaseFragmentContract<
                                 action.invoke(true, null)
                             }
 
-                            else -> throw NotImplementedError("Not implemented")
+                            else -> {}
                         }
                     }
                 }

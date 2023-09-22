@@ -22,11 +22,12 @@ class SourceViewModel(
 
     private val backupSourceList = MutableStateFlow<List<SourceEntity>>(emptyList())
     private val sourceList =
-        MutableStateFlow<Event<UIState<List<SourceEntity>>>>(Event(UIState.Loading))
+        MutableStateFlow<Event<UIState<List<SourceEntity>>>>(Event(UIState.Initial))
     val sources = sourceList.asStateFlow()
 
     fun getSourceByCategory(category: String, page: Int = 1) {
         viewModelScope.launch {
+            sourceList.value = Event(UIState.Loading)
             when (val result = appRepositoryContract.getSources(category, page)) {
                 is ResultData.Success -> {
                     backupSourceList.value = result.data

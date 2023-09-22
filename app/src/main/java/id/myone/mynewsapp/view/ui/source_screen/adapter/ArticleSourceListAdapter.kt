@@ -41,14 +41,17 @@ class ArticleSourceListAdapter(
     }
 
 
-    inner class LoadingViewHolder(binding: LoadingItemBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class LoadingViewHolder(binding: LoadingItemBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return if (viewType == LOADING) {
-            val binding = LoadingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding =
+                LoadingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             LoadingViewHolder(binding)
         } else {
-            val binding = SourceListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding =
+                SourceListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             ViewHolders(binding)
         }
     }
@@ -60,13 +63,17 @@ class ArticleSourceListAdapter(
         }
     }
 
-    override fun submitList(list: List<SourceEntity>?) {
-        val currentSize = dataList.size
-        if (list != null) {
-            dataList.addAll(list)
-            super.submitList(dataList)
-            notifyItemRangeInserted(currentSize, list.size)
+    @SuppressLint("NotifyDataSetChanged")
+    fun setSourceList(sources: List<SourceEntity>, isFilteredData: Boolean) {
+        if (isFilteredData) {
+            isLastPage = false
+            notifyItemRangeRemoved(0, dataList.size)
+            dataList.clear()
         }
+
+        dataList.addAll(sources)
+        submitList(dataList)
+        notifyItemRangeInserted(dataList.size, sources.size)
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -89,7 +89,7 @@ class ArticleSourceFragment : BaseFragment<FragmentArticleSourceBinding>() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.sources.collect {
-                    it.getContentIfNotHandled()?.let { state ->
+                    it.getContent().let { state ->
                         binding.apply {
                             when (state) {
 
@@ -108,6 +108,10 @@ class ArticleSourceFragment : BaseFragment<FragmentArticleSourceBinding>() {
                                         sourceAdapter.removeFooter()
                                     }
                                     action(true, null)
+                                }
+
+                                is UIState.Initial -> {
+                                    viewModel.getSourceByCategory(args.categoryName, sourceAdapter.getCurrentPage())
                                 }
                             }
                         }
@@ -131,7 +135,7 @@ class ArticleSourceFragment : BaseFragment<FragmentArticleSourceBinding>() {
 
                         if (sources!!.isNotEmpty()) {
                             sourceAdapter.incrementCurrentPage()
-                            sourceAdapter.submitList(sources)
+                            sourceAdapter.setSourceList(sources, false)
                         } else {
                             showSnackBarMessage(getString(R.string.end_page_message)).apply {
                                 show()
@@ -152,7 +156,7 @@ class ArticleSourceFragment : BaseFragment<FragmentArticleSourceBinding>() {
                     }
 
                     hideLoading()
-                    sourceAdapter.submitList(sources)
+                    sourceAdapter.setSourceList(sources, true)
 
                 } else {
                     // if errors
@@ -163,8 +167,6 @@ class ArticleSourceFragment : BaseFragment<FragmentArticleSourceBinding>() {
                 }
             }
         }
-
-        viewModel.getSourceByCategory(args.categoryName, sourceAdapter.getCurrentPage())
     }
 
     private fun getArticleOnScrollListener(): SourceListScrollListener {
